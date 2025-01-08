@@ -4,16 +4,21 @@ import { BrowserRouter, Route, Routes } from 'react-router';
 import './index.css';
 import App from './App.tsx';
 import NotFound from './pages/NotFound.tsx';
+import ThemeProvider from './contexts/ThemeContext.tsx';
 
 const root = document.getElementById('root')!;
 
 createRoot(root).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<App />} />
-        <Route path='*' element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+    <ThemeProvider>
+      <div className='w-full h-full dark:bg-black dark:text-white'>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<App />} />
+            <Route path='*' element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </ThemeProvider>
   </StrictMode>
 );
