@@ -14,10 +14,10 @@ Main Branch currently include
 - ESLint / Prettier
 - React Router
   - 404 Page
+- React Testing Library / Jest
 
 Planned addons
 
-- React Testing Library / Jest
 - Cypress
 - React Context
 - Github actions (for deploying to GH pages)
