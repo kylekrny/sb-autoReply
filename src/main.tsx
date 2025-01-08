@@ -12,7 +12,6 @@ createRoot(root).render(
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<App />} />
-
         <Route path='*' element={<NotFound />} />
       </Routes>
     </BrowserRouter>
