@@ -15,11 +15,12 @@ Main Branch currently include
 - React Router
   - 404 Page
 - React Testing Library / Jest
+- React Context
 
 Planned addons
 
 - Cypress
-- React Context
+
 - Github actions (for deploying to GH pages)
 
 ---
