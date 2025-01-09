@@ -14,17 +14,21 @@ Main Branch currently include
 - ESLint / Prettier
 - React Router
   - 404 Page
-- React Testing Library / Jest
+- React Testing Library / vitest w/ istanbul for test coverage
 - React Context
 
-Planned addons
+## Planned addons
 
 - Cypress
-
 - Github actions (for deploying to GH pages)
 
----
+### Michael addons
 
+- Dockerize w/ hot reload
+
+### Backlog
+
+- env variables
 - Tailwind Components
 - Firebase Auth
   - Login
