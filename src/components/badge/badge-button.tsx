@@ -1,7 +1,7 @@
 import * as Headless from '@headlessui/react';
 import clsx from 'clsx';
 import React, { forwardRef } from 'react';
-import { TouchTarget } from '../button';
+import { TouchTarget } from '../button/touch-target';
 import { Link } from '../link';
 import { BadgeProps } from '.';
 import { Badge } from './badge';
