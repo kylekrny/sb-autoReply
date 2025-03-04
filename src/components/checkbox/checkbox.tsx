@@ -1,47 +1,5 @@
-import * as Headless from '@headlessui/react'
-import clsx from 'clsx'
-import type React from 'react'
-
-export function CheckboxGroup({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
-  return (
-    <div
-      data-slot="control"
-      {...props}
-      className={clsx(
-        className,
-        // Basic groups
-        'space-y-3',
-        // With descriptions
-        'has-data-[slot=description]:space-y-6 has-data-[slot=description]:**:data-[slot=label]:font-medium'
-      )}
-    />
-  )
-}
-
-export function CheckboxField({
-  className,
-  ...props
-}: { className?: string } & Omit<Headless.FieldProps, 'as' | 'className'>) {
-  return (
-    <Headless.Field
-      data-slot="field"
-      {...props}
-      className={clsx(
-        className,
-        // Base layout
-        'grid grid-cols-[1.125rem_1fr] items-center gap-x-4 gap-y-1 sm:grid-cols-[1rem_1fr]',
-        // Control layout
-        '*:data-[slot=control]:col-start-1 *:data-[slot=control]:row-start-1 *:data-[slot=control]:justify-self-center',
-        // Label layout
-        '*:data-[slot=label]:col-start-2 *:data-[slot=label]:row-start-1 *:data-[slot=label]:justify-self-start',
-        // Description layout
-        '*:data-[slot=description]:col-start-2 *:data-[slot=description]:row-start-2',
-        // With description
-        'has-data-[slot=description]:**:data-[slot=label]:font-medium'
-      )}
-    />
-  )
-}
+import * as Headless from '@headlessui/react';
+import clsx from 'clsx';
 
 const base = [
   // Basic layout
@@ -69,7 +27,7 @@ const base = [
   // Forced colors mode
   'forced-colors:[--checkbox-check:HighlightText] forced-colors:[--checkbox-checked-bg:Highlight] forced-colors:group-data-disabled:[--checkbox-check:Highlight]',
   'dark:forced-colors:[--checkbox-check:HighlightText] dark:forced-colors:[--checkbox-checked-bg:Highlight] dark:forced-colors:group-data-disabled:[--checkbox-check:Highlight]',
-]
+];
 
 const colors = {
   'dark/zinc': [
@@ -110,48 +68,48 @@ const colors = {
     '[--checkbox-check:var(--color-white)] [--checkbox-checked-bg:var(--color-fuchsia-500)] [--checkbox-checked-border:var(--color-fuchsia-600)]/90',
   pink: '[--checkbox-check:var(--color-white)] [--checkbox-checked-bg:var(--color-pink-500)] [--checkbox-checked-border:var(--color-pink-600)]/90',
   rose: '[--checkbox-check:var(--color-white)] [--checkbox-checked-bg:var(--color-rose-500)] [--checkbox-checked-border:var(--color-rose-600)]/90',
-}
+};
 
-type Color = keyof typeof colors
+type Color = keyof typeof colors;
 
 export function Checkbox({
   color = 'dark/zinc',
   className,
   ...props
 }: {
-  color?: Color
-  className?: string
+  color?: Color;
+  className?: string;
 } & Omit<Headless.CheckboxProps, 'as' | 'className'>) {
   return (
     <Headless.Checkbox
-      data-slot="control"
+      data-slot='control'
       {...props}
       className={clsx(className, 'group inline-flex focus:outline-hidden')}
     >
       <span className={clsx([base, colors[color]])}>
         <svg
-          className="size-4 stroke-(--checkbox-check) opacity-0 group-data-checked:opacity-100 sm:h-3.5 sm:w-3.5"
-          viewBox="0 0 14 14"
-          fill="none"
+          className='size-4 stroke-(--checkbox-check) opacity-0 group-data-checked:opacity-100 sm:h-3.5 sm:w-3.5'
+          viewBox='0 0 14 14'
+          fill='none'
         >
           {/* Checkmark icon */}
           <path
-            className="opacity-100 group-data-indeterminate:opacity-0"
-            d="M3 8L6 11L11 3.5"
+            className='opacity-100 group-data-indeterminate:opacity-0'
+            d='M3 8L6 11L11 3.5'
             strokeWidth={2}
-            strokeLinecap="round"
-            strokeLinejoin="round"
+            strokeLinecap='round'
+            strokeLinejoin='round'
           />
           {/* Indeterminate icon */}
           <path
-            className="opacity-0 group-data-indeterminate:opacity-100"
-            d="M3 7H11"
+            className='opacity-0 group-data-indeterminate:opacity-100'
+            d='M3 7H11'
             strokeWidth={2}
-            strokeLinecap="round"
-            strokeLinejoin="round"
+            strokeLinecap='round'
+            strokeLinejoin='round'
           />
         </svg>
       </span>
     </Headless.Checkbox>
-  )
+  );
 }
