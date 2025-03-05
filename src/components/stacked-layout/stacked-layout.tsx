@@ -2,7 +2,7 @@
 
 import * as Headless from '@headlessui/react';
 import React, { useState } from 'react';
-import { NavbarItem } from '../navbar/navbar';
+import { NavbarItem } from '../navbar/navbar-item';
 
 function OpenMenuIcon() {
   return (
