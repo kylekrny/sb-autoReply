@@ -11,14 +11,14 @@ const root = document.getElementById('root')!;
 createRoot(root).render(
   <StrictMode>
     <ThemeProvider>
-      <div className='w-full h-full dark:bg-black dark:text-white'>
+      <>
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<Landing />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
         </BrowserRouter>
-      </div>
+      </>
     </ThemeProvider>
   </StrictMode>
 );
