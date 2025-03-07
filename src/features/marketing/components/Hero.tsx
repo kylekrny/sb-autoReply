@@ -1,6 +1,15 @@
 import { ChatBubbleOvalLeftIcon } from '@heroicons/react/24/outline';
+import { useState } from 'react';
+import { submitWaitlistForm } from '../api/email-signup';
 
 export default function Hero() {
+  const [email, setEmail] = useState('');
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    submitWaitlistForm(email);
+  };
+
   return (
     <div className='bg-gray-800 w-full h-full'>
       <div className='flex text-gray-300 pt-5 pl-5'>
@@ -72,7 +81,10 @@ export default function Hero() {
               </p>
               <div className='mt-10 flex flex-col items-center justify-center gap-x-6'>
                 <h6>Join the waitlist for early access!</h6>
-                <form className='mx-auto mt-6 flex max-w-md gap-x-4'>
+                <form
+                  onSubmit={handleSubmit}
+                  className='mx-auto mt-6 flex max-w-md gap-x-4'
+                >
                   <label htmlFor='email-address' className='sr-only'>
                     Email address
                   </label>
@@ -80,6 +92,8 @@ export default function Hero() {
                     id='email-address'
                     name='email'
                     type='email'
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                     placeholder='Enter your email'
                     autoComplete='email'
