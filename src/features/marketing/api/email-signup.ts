@@ -1,27 +1,19 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInAnonymously, connectAuthEmulator } from 'firebase/auth';
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  connectFirestoreEmulator,
-} from 'firebase/firestore';
+import { getAuth, signInAnonymously } from 'firebase/auth';
+import { getFirestore, collection, addDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: 'sb-autoreply',
-  authDomain: 'sb-autoreply.firebaseapp.com',
-  projectId: 'sb-autoreply',
-  storageBucket: 'sb-autoreply.appspot.com',
-  messagingSenderId: 'sb-autoreplySenderId',
-  appId: 'sb-autoreply',
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-
-// Connect to Firebase emulators
-connectAuthEmulator(auth, 'http://localhost:9099');
-connectFirestoreEmulator(db, 'localhost', 8080);
 
 signInAnonymously(auth)
   .then(() => {
