@@ -1,3 +1,4 @@
+.env
 # Logs
 logs
 *.log
@@ -88,7 +89,6 @@ jspm_packages/
 
 # Optional npm cache directory
 .npm
-.env
 
 # Optional eslint cache
 .eslintcache
@@ -103,7 +103,7 @@ jspm_packages/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
+
 
 # next.js build output
 .next
