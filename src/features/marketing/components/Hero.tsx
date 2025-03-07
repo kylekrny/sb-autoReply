@@ -1,13 +1,26 @@
-import { ChatBubbleOvalLeftIcon } from '@heroicons/react/24/outline';
+import {
+  ChatBubbleOvalLeftIcon,
+  CheckCircleIcon,
+} from '@heroicons/react/24/outline';
 import { useState } from 'react';
 import { submitWaitlistForm } from '../api/email-signup';
 
 export default function Hero() {
   const [email, setEmail] = useState('');
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    submitWaitlistForm(email);
+    console.log('helo');
+    submitWaitlistForm(email)
+      .then((status) => {
+        if (status) {
+          setSuccess(true);
+        }
+      })
+      .catch((error) => {
+        console.error('Error adding document: ', error);
+      });
   };
 
   return (
@@ -81,31 +94,40 @@ export default function Hero() {
               </p>
               <div className='mt-10 flex flex-col items-center justify-center gap-x-6'>
                 <h6>Join the waitlist for early access!</h6>
-                <form
-                  onSubmit={handleSubmit}
-                  className='mx-auto mt-6 flex max-w-md gap-x-4'
-                >
-                  <label htmlFor='email-address' className='sr-only'>
-                    Email address
-                  </label>
-                  <input
-                    id='email-address'
-                    name='email'
-                    type='email'
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    placeholder='Enter your email'
-                    autoComplete='email'
-                    className='min-w-0 flex-auto rounded-md bg-white/5 px-3.5 py-2 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-white sm:text-sm/6'
-                  />
-                  <button
-                    type='submit'
-                    className='flex-none rounded-md bg-orange-500 px-5 py-3.5 text-sm font-semibold text-gray-900 shadow-xs hover:bg-orange-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white'
+                {success ? (
+                  <div className='mx-auto mt-6 flex max-w-md gap-x-4'>
+                    <CheckCircleIcon className='w-6 h-6 text-green-500' />
+                    <p className='text-sm text-green-500'>
+                      Thanks for joining the waitlist!
+                    </p>
+                  </div>
+                ) : (
+                  <form
+                    onSubmit={handleSubmit}
+                    className='mx-auto mt-6 flex max-w-md gap-x-4'
                   >
-                    Notify me
-                  </button>
-                </form>
+                    <label htmlFor='email-address' className='sr-only'>
+                      Email address
+                    </label>
+                    <input
+                      id='email-address'
+                      name='email'
+                      type='email'
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      placeholder='Enter your email'
+                      autoComplete='email'
+                      className='min-w-0 flex-auto rounded-md bg-white/5 px-3.5 py-2 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-white sm:text-sm/6'
+                    />
+                    <button
+                      type='submit'
+                      className='flex-none rounded-md bg-orange-500 px-5 py-3.5 text-sm font-semibold text-gray-900 shadow-xs hover:bg-orange-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white'
+                    >
+                      Notify me
+                    </button>
+                  </form>
+                )}
               </div>
             </div>
           </div>

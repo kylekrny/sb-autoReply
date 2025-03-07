@@ -1,13 +1,27 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInAnonymously } from 'firebase/auth';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { getAuth, signInAnonymously, connectAuthEmulator } from 'firebase/auth';
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  connectFirestoreEmulator,
+} from 'firebase/firestore';
 
 const firebaseConfig = {
-  /* Your Firebase Config */
+  apiKey: 'sb-autoreply',
+  authDomain: 'sb-autoreply.firebaseapp.com',
+  projectId: 'sb-autoreply',
+  storageBucket: 'sb-autoreply.appspot.com',
+  messagingSenderId: 'sb-autoreplySenderId',
+  appId: 'sb-autoreply',
 };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+
+// Connect to Firebase emulators
+connectAuthEmulator(auth, 'http://localhost:9099');
+connectFirestoreEmulator(db, 'localhost', 8080);
 
 signInAnonymously(auth)
   .then(() => {
@@ -23,7 +37,8 @@ export const submitWaitlistForm = async (email: string) => {
       email,
       timestamp: new Date(),
     });
-    alert('Thanks for signing up!');
+    console.log('Document successfully written!');
+    return true;
   } catch (error) {
     console.error('Error adding document: ', error);
   }
