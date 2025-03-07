@@ -1,9 +1,17 @@
-import {
-  ChatBubbleOvalLeftIcon,
-  CheckCircleIcon,
-} from '@heroicons/react/24/outline';
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import { submitWaitlistForm } from '../api/email-signup';
+
+const ChatBubbleOvalLeftIcon = lazy(() =>
+  import('@heroicons/react/24/outline').then((module) => ({
+    default: module.ChatBubbleOvalLeftIcon,
+  }))
+);
+
+const CheckCircleIcon = lazy(() =>
+  import('@heroicons/react/24/outline').then((module) => ({
+    default: module.CheckCircleIcon,
+  }))
+);
 
 export default function Hero() {
   const [email, setEmail] = useState('');
@@ -25,7 +33,9 @@ export default function Hero() {
   return (
     <div className='bg-gray-800 w-full h-full'>
       <div className='absolute flex text-gray-300 pt-5 pl-5'>
-        <ChatBubbleOvalLeftIcon className='w-6 h-6 mr-2' />
+        <Suspense fallback={<div>Loading...</div>}>
+          <ChatBubbleOvalLeftIcon className='w-6 h-6 mr-2' />
+        </Suspense>
         <span>SB AutoReply</span>
       </div>
       <div className='overflow-hidden relative isolate w-full h-full'>
@@ -95,7 +105,9 @@ export default function Hero() {
                 <h6>Join the waitlist for early access!</h6>
                 {success ? (
                   <div className='mx-auto mt-6 flex max-w-md gap-x-4'>
-                    <CheckCircleIcon className='w-6 h-6 text-green-500' />
+                    <Suspense fallback={<div>Loading...</div>}>
+                      <CheckCircleIcon className='w-6 h-6 text-green-500' />
+                    </Suspense>
                     <p className='text-sm text-green-500'>
                       Thanks for joining the waitlist!
                     </p>
